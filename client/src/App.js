@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Today from "./pages/Today";
 import Calendar from "./pages/Calendar";
@@ -9,8 +9,35 @@ import TimeRecorder from "./component/common/TimeRecorder";
 import Banner from "./component/common/Banner";
 import styled from "styled-components";
 
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    function intervalCallback() {
+      savedCallback.current();
+    }
+
+    if (delay !== null) {
+      const timer = setInterval(intervalCallback, delay);
+      return () => clearInterval(timer);
+    }
+  }, [delay]);
+}
+
 function App() {
+  const [todayTime, setTodayTime] = useState(0);
   const [status, setStatus] = useState(1);
+
+  useInterval(
+    () => {
+      setTodayTime(todayTime + 1);
+    },
+    status === 1 ? 1000 : null
+  );
 
   return (
     <Wrapper>
@@ -22,7 +49,12 @@ function App() {
               exact
               path="/"
               render={(props) => (
-                <Today {...props} status={status} setStatus={setStatus} />
+                <Today
+                  {...props}
+                  status={status}
+                  setStatus={setStatus}
+                  todayTime={todayTime}
+                />
               )}
             />
             <Route exact path="/rank" component={Rank} />

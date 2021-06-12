@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { VictoryPie } from "victory";
 
@@ -16,9 +16,20 @@ const createRandomDate = (date, type = 0) => {
   return TIME[random];
 };
 
-const Today = ({ history, status, setStatus }) => {
+const Today = ({ history, todayTime }) => {
   const [date, setDate] = useState(new Date());
-  // const [status, setStatus] = useState(1);
+  const [isToday, setIsToday] = useState(true);
+
+  useEffect(() => {
+    const today = new Date();
+    const currentDate = new Date(date);
+    if (
+      today.getDate() === currentDate.getDate() &&
+      today.getMonth() === currentDate.getMonth()
+    ) {
+      setIsToday(true);
+    } else setIsToday(false);
+  }, [date]);
 
   const onClickArrow = (type) => {
     if (type) setDate(+date - ONE_DAY);
@@ -26,11 +37,20 @@ const Today = ({ history, status, setStatus }) => {
   };
   const onClickCalendar = () => history.push("/month");
 
+  const convertTodayTime = (time) => {
+    const hour = (parseInt(time / 3600) + "").padStart(2, 0);
+    const minute = ((parseInt(time / 60) % 60) + "").padStart(2, 0);
+    const sec = ((time % 60) + "").padStart(2, 0);
+    return `${hour}:${minute}:${sec}`;
+  };
+
   return (
     <Wrapper>
       <CalendarIcon onClick={onClickCalendar} />
       <Header onClickArrow={onClickArrow} date={date} />
-      <TotalTime>{createRandomDate(date, 1)}</TotalTime>
+      <TotalTime>
+        {isToday ? convertTodayTime(todayTime) : createRandomDate(date, 1)}
+      </TotalTime>
       <PieWrapper>
         <VictoryPie
           colorScale={PIE_COLOR}
