@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { VictoryPie } from "victory";
 
 import Header from "../component/Header";
+import Record from "../component/Record";
 import TimeRecorder from "../component/common/TimeRecorder";
 import { ReactComponent as CalendarSvg } from "../svg/calendar.svg";
 import { TIME, TOTAL_TIME } from "../constants/time";
@@ -19,7 +20,7 @@ const createRandomDate = (date, type = 0) => {
 
 const Today = ({ history }) => {
   const [date, setDate] = useState(new Date());
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(1);
 
   const onClickArrow = (type) => {
     if (type) setDate(+date - ONE_DAY);
@@ -39,6 +40,7 @@ const Today = ({ history }) => {
           labelComponent={<span />}
         />
       </PieWrapper>
+      {status === 3 && <Record setStatus={setStatus} />}
       <TimeRecorder status={status} setStatus={setStatus} />
     </Wrapper>
   );

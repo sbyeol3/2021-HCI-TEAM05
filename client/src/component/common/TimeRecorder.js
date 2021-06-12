@@ -7,9 +7,9 @@ const TimeRecorder = ({ status, setStatus }) => {
   const onClickButton = (type) => setStatus(type);
   return (
     <Wrapper>
-      <PlayButton type={0} status={status} onClick={() => onClickButton(0)} />
-      <PauseButton type={1} status={status} onClick={() => onClickButton(1)} />
-      <StopButton type={2} status={status} onClick={() => onClickButton(2)} />
+      <PlayButton type={1} status={status} onClick={() => onClickButton(1)} />
+      <PauseButton type={2} status={status} onClick={() => onClickButton(2)} />
+      <StopButton type={3} status={status} onClick={() => onClickButton(3)} />
     </Wrapper>
   );
 };
