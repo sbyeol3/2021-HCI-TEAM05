@@ -46,13 +46,8 @@ const Calendar = () => {
     "September",
     "October",
     "November",
-    "December"
+    "December",
   ];
-
-  // useEffect(() => {
-  //   const tempCal = buildCalendar(month);
-  //   setCalendar(tempCal);
-  // }, [month, calendar]);
 
   return (
     <CalendarWrap>
