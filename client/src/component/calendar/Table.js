@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const TableWrap = styled.div`
@@ -25,13 +25,24 @@ const TableWrap = styled.div`
   }
 `;
 
-const tdColor = ["#ff8513", "#ffa550", "#ffc288", "#ffe0c2", "white"];
+const COLOR = ["#ff8513", "#ffa550", "#ffc288", "#ffe0c2", "white"];
+
+const randomColor = (date) => {
+  let arr = [];
+  for (let i = 0; i < date; i++) {
+    arr.push(COLOR[parseInt(Math.random() * 5)]);
+  }
+
+  return arr;
+};
 
 const Table = ({ year, month }) => {
   const firstDate = new Date(year, month, 1);
   const lastDate = new Date(year, month + 1, 0);
   let dateArr = [];
   let weekArr = [];
+  const [tdColor, setTdColor] = useState([]);
+  const now = new Date();
 
   for (let i = 0; i < firstDate.getDay(); i++) {
     weekArr.push(0);
@@ -43,6 +54,10 @@ const Table = ({ year, month }) => {
       weekArr = [i];
     }
   }
+
+  useEffect(() => {
+    setTdColor(randomColor(lastDate.getDate()));
+  }, [year, month]);
 
   return (
     <TableWrap>
@@ -59,20 +74,33 @@ const Table = ({ year, month }) => {
           </tr>
         </thead>
         <tbody>
-          {dateArr.map((week) => {
+          {dateArr.map((week, weekIdx) => {
             return (
               <tr>
-                {week.map((date) =>
+                {week.map((date, dateIdx) =>
                   date === 0 ? (
                     <td></td>
-                  ) : (
+                  ) : month === now.getMonth() + 1 ? (
                     <td
                       style={{
-                        backgroundColor: tdColor[Math.floor(Math.random() * 5)]
+                        backgroundColor:
+                          weekIdx * 7 + dateIdx < now.getDate()
+                            ? tdColor[weekIdx * 7 + dateIdx]
+                            : "white"
                       }}
                     >
                       {date}
                     </td>
+                  ) : month < now.getMonth() + 1 ? (
+                    <td
+                      style={{
+                        backgroundColor: tdColor[weekIdx * 7 + dateIdx]
+                      }}
+                    >
+                      {date}
+                    </td>
+                  ) : (
+                    <td>{date}</td>
                   )
                 )}
               </tr>
