@@ -28,7 +28,10 @@ const RankWrap = styled.div`
     margin: 1rem 1rem 0 1rem;
 
     &__box {
+      color: #ff8513;
+
       span {
+        color: black;
         font-weight: bold;
         padding: 0.3rem 1rem 0 0.3rem;
       }
@@ -105,7 +108,9 @@ const Rank = () => {
       </div>
       <div className="average">
         <div className="average__title">Average Time of This Month</div>
-        <div className="average__box">{avgTime}</div>
+        <div className="average__box" style={{ color: "#ff8513" }}>
+          {avgTime}
+        </div>
       </div>
       <div className="most">
         <div className="most__title">Most Used Apps</div>

@@ -6,6 +6,7 @@ const ProfileWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   justify-content: space-around;
   overflow-y: scroll;
 
@@ -15,7 +16,7 @@ const ProfileWrap = styled.div`
   }
 
   .main {
-    margin: 1rem 1rem 0 1rem;
+    margin: 12rem 1rem 0 1rem;
 
     &__box {
       margin-top: 1rem;
@@ -23,9 +24,20 @@ const ProfileWrap = styled.div`
       border-radius: 15px;
       border: solid 2px lightgray;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+      align-items: center;
+
+      &--type {
+        color: #ff8513;
+
+        span {
+          margin-right: 1rem;
+          color: black;
+        }
+      }
 
       &--desc {
+        margin-left: 4rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -68,7 +80,6 @@ const ProfileWrap = styled.div`
       &--profile {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         margin-right: 1rem;
       }
 
@@ -101,7 +112,7 @@ const Profile = () => {
             className="main__box--picture"
             src={user.picture}
             alt=""
-            style={{ width: "3rem" }}
+            style={{ width: "3rem", height: "3rem" }}
           />
           <div className="main__box--desc">
             <div className="main__box--name">
