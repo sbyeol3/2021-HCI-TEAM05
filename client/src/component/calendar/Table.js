@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { TOTAL_TIME } from "../../constants/time";
 
 const TableWrap = styled.div`
   width: 100%;
@@ -25,31 +26,13 @@ const TableWrap = styled.div`
   }
 `;
 
-// const buildCalendar = (month) => {
-//   let rows = [];
-//     cell.value = [Math.random() * 24];
-//     if (cell.value >= 8) cell.style.backgroundColor = "rgb(81.6%, 58.9%, 0%)";
-//     else if (cell.value >= 4)
-//       cell.style.backgroundColor = "rgb(94.1%, 75.4%, 27.1%)";
-//     else if (cell.value >= 1)
-//       cell.style.backgroundColor = "rgb(100%, 89.2%, 61.2%)";
-//     else cell.style.backgroundColor = "white";
-//     cell.onClick = showRecord(cell);
-//   }
-// };
-
-// // show record on modal window
-// const showRecord = (cell) => {
-//   const timeArr = cell.value;
-// };
+const tdColor = ["#ff8513", "#ffa550", "#ffc288", "#ffe0c2", "white"];
 
 const Table = ({ year, month }) => {
   const firstDate = new Date(`${month} 1, ${year} 00:00:00`);
   const lastDate = new Date(year, month + 1, 0);
   let dateArr = [];
   let weekArr = [];
-  console.log(firstDate.getDay());
-  console.log(lastDate.getDate());
 
   for (let i = 0; i < firstDate.getDay(); i++) {
     weekArr.push(0);
@@ -81,7 +64,17 @@ const Table = ({ year, month }) => {
             return (
               <tr>
                 {week.map((date, idx) =>
-                  date === 0 ? <td></td> : <td>{date}</td>
+                  date === 0 ? (
+                    <td></td>
+                  ) : (
+                    <td
+                      style={{
+                        backgroundColor: tdColor[Math.floor(Math.random() * 5)]
+                      }}
+                    >
+                      {date}
+                    </td>
+                  )
                 )}
               </tr>
             );

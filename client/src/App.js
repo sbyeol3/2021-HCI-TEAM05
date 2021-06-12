@@ -57,11 +57,7 @@ function App() {
                 />
               )}
             />
-            <Route
-              exact
-              path="/month"
-              component={() => <Calendar todayTime={todayTime} />}
-            />
+            <Route exact path="/month" component={Calendar} />
             <Route exact path="/rank" component={Rank} />
             <Route exact path="/profile" component={Profile} />
           </Switch>

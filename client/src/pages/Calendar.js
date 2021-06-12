@@ -46,10 +46,9 @@ const CalendarWrap = styled.div`
   }
 `;
 
-const Calendar = ({ todayTime }) => {
+const Calendar = () => {
   const [month, setMonth] = useState(6);
   const [year, setYear] = useState(2021);
-  // const [calendar, setCalendar] = useState(null);
 
   const monthStr = [
     "January",
@@ -98,7 +97,7 @@ const Calendar = ({ todayTime }) => {
             }
           />
         </div>
-        <Table year={year} month={month} todayTime={todayTime} />
+        <Table year={year} month={month} />
       </div>
     </CalendarWrap>
   );
