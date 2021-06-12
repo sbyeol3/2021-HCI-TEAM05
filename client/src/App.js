@@ -57,9 +57,13 @@ function App() {
                 />
               )}
             />
+            <Route
+              exact
+              path="/month"
+              component={() => <Calendar todayTime={todayTime} />}
+            />
             <Route exact path="/rank" component={Rank} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/month" component={Calendar} />
           </Switch>
           {status === 3 && <Record setStatus={setStatus} />}
           <TimeRecorder status={status} setStatus={setStatus} />
