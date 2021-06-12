@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import RecordItems from "./RecordItems";
 
-const Record = ({ setStatus }) => {
+const Record = ({ setStatus, records, removeTime }) => {
   const onClickSave = () => setStatus(0);
   return (
     <Modal>
       <Title>Would you save today records?</Title>
-      <RecordItems />
+      <RecordItems records={records} removeTime={removeTime} />
       <SaveButton onClick={onClickSave}>save</SaveButton>
     </Modal>
   );
@@ -39,7 +39,7 @@ const Title = styled.div`
 `;
 
 const SaveButton = styled.button`
-  margin-top: 25px;
+  margin-top: auto;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
