@@ -6,26 +6,32 @@ import Profile from "./pages/Profile";
 import Banner from "./component/common/Banner";
 import styled from "styled-components";
 
-const AppWrap = styled.div`
+function App() {
+  return (
+    <Wrapper>
+      <BrowserRouter>
+        <Banner />
+        <RightSide>
+          <Switch>
+            <Route exact path="/" component={Today} />
+            <Route exact path="/rank" component={Rank} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/month" component={Calendar} />
+          </Switch>
+        </RightSide>
+      </BrowserRouter>
+    </Wrapper>
+  );
+}
+
+export default App;
+
+const Wrapper = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
 `;
 
-function App() {
-  return (
-    <AppWrap>
-      <BrowserRouter>
-        <Banner />
-        <Switch>
-          <Route exact path="/" component={Today} />
-          <Route exact path="/rank" component={Rank} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/month" component={Calendar} />
-        </Switch>
-      </BrowserRouter>
-    </AppWrap>
-  );
-}
-
-export default App;
+const RightSide = styled.div`
+  width: calc(100vw - 300px);
+`;

@@ -33,13 +33,18 @@ export default DayText;
 
 const Wrapper = styled.div`
   font-size: 30px;
+  font-weight: 600;
+`;
+
+const Month = styled.span`
+  font-size: 40px;
   font-weight: 800;
 `;
 
-const Month = styled.span``;
+const MonthEng = styled.span`
+  margin: 0 15px;
+`;
 
-const MonthEng = styled.span``;
-
-const DateNumber = styled.span``;
+const DateNumber = styled(Month)``;
 
 const DateUnit = styled.span``;
