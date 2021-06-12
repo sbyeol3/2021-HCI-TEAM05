@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import DayText from "./DayText";
 import { ReactComponent as ArrowSvg } from "../../svg/arrow.svg";
