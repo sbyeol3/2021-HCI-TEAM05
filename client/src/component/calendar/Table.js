@@ -43,9 +43,9 @@ const TableWrap = styled.div`
 //   const timeArr = cell.value;
 // };
 
-const Table = ({ month }) => {
-  const firstDate = new Date(`${month} 1, 2021 00:00:00`);
-  const lastDate = new Date(2021, month + 1, 0);
+const Table = ({ year, month }) => {
+  const firstDate = new Date(`${month} 1, ${year} 00:00:00`);
+  const lastDate = new Date(year, month + 1, 0);
   let dateArr = [];
   let weekArr = [];
   console.log(firstDate.getDay());

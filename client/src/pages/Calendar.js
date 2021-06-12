@@ -31,6 +31,7 @@ const CalendarWrap = styled.div`
 
 const Calendar = () => {
   const [month, setMonth] = useState(6);
+  const [year, setYear] = useState(2021);
   // const [calendar, setCalendar] = useState(null);
 
   const monthStr = [
@@ -59,23 +60,46 @@ const Calendar = () => {
         <div className="calendar__header">
           <img
             className="calendar__header--left"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVORbI7UK59o9CpXQsF_fP-eyfJ4sp1wV7-Q&usqp=CAU"
+            src="http://www.clker.com/cliparts/L/Y/I/S/g/X/yellow-arrow-hi.png"
             alt=""
-            style={{ width: "20px", height: "20px" }}
-            onClick={() => setMonth((prev) => prev - 1)}
+            style={{
+              width: "20px",
+              height: "20px",
+              transform: "rotate(180deg)"
+            }}
+            onClick={() =>
+              setMonth((prev) => {
+                if (prev > 1) return prev - 1;
+                else {
+                  setYear((prev) => prev - 1);
+                  return 12;
+                }
+              })
+            }
           />
           <div className="calendar__header--date">
             {month} <span>{monthStr[month - 1]}</span>
           </div>
           <img
             className="calendar__header--right"
-            src="https://www.pngjoy.com/pngm/125/13965639_aarow-computer-icon-left-right-arrow-cartoon-orange.png"
+            src="http://www.clker.com/cliparts/L/Y/I/S/g/X/yellow-arrow-hi.png"
             alt=""
-            style={{ width: "20px", height: "20px" }}
-            onClick={() => setMonth((prev) => prev + 1)}
+            style={{
+              width: "20px",
+              height: "20px"
+            }}
+            onClick={() =>
+              setMonth((prev) => {
+                if (prev < 12) return prev + 1;
+                else {
+                  setYear((prev) => prev + 1);
+                  return 1;
+                }
+              })
+            }
           />
         </div>
-        <Table month={month} />
+        <Table year={year} month={month} />
       </div>
     </CalendarWrap>
   );
