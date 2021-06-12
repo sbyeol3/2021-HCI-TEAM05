@@ -62,6 +62,17 @@ function App() {
     setTodayTime(todayTime - diff / 1000);
   };
 
+  const editTime = (time, idx) => {
+    const diff = records[idx][1] - records[idx][0];
+    const newDiff = time[1] - time[0];
+    const updatedRecords = records.map((record, i) => {
+      if (idx !== i) return record;
+      return time;
+    });
+    setRecords(updatedRecords);
+    setTodayTime(todayTime - diff / 1000 + newDiff / 1000);
+  };
+
   return (
     <Wrapper>
       <BrowserRouter>
@@ -89,6 +100,7 @@ function App() {
               setStatus={setStatus}
               records={records}
               removeTime={removeTime}
+              editTime={editTime}
             />
           )}
           <TimeRecorder status={status} setStatus={setStatus} />
