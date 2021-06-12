@@ -3,12 +3,54 @@ import styled from "styled-components";
 import DATA from "../../data.json";
 import { withRouter } from "react-router-dom";
 
-const BannerWrap = styled.div`
-  width: 13rem;
-  background-color: rgb(100%, 72.1%, 0%);
+const Banner = ({ history }) => {
+  const user = DATA.users[0];
+
+  return (
+    <BannerWrapper>
+      <div className="banner">
+        <div className="banner--profile">
+          <img
+            className="banner--profile__picture"
+            src={user.picture}
+            alt="profile"
+          />
+          <div className="banner--profile__name">{user.name}</div>
+        </div>
+        <div className="banner--contents">
+          <div
+            className="banner--contents__list"
+            onClick={() => history.push("/")}
+          >
+            My Time
+          </div>
+          <div
+            className="banner--contents__list"
+            onClick={() => history.push("/rank")}
+          >
+            Rank
+          </div>
+          <div
+            className="banner--contents__list"
+            onClick={() => history.push("/profile")}
+          >
+            Profile
+          </div>
+        </div>
+      </div>
+    </BannerWrapper>
+  );
+};
+
+export default withRouter(Banner);
+
+const BannerWrapper = styled.div`
+  width: 300px;
+  height: 100vh;
+  min-height: 100%;
+  background-color: #ff8513;
 
   .banner {
-    /* width: 100%; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -50,40 +92,3 @@ const BannerWrap = styled.div`
     }
   }
 `;
-
-const Banner = ({ history }) => {
-  const user = DATA.users[0];
-
-  return (
-    <BannerWrap>
-      <div className="banner">
-        <div className="banner--profile">
-          <img className="banner--profile__picture" src={user.picture} alt="" />
-          <div className="banner--profile__name">{user.name}</div>
-        </div>
-        <div className="banner--contents">
-          <div
-            className="banner--contents__list"
-            onClick={() => history.push("/")}
-          >
-            My Time
-          </div>
-          <div
-            className="banner--contents__list"
-            onClick={() => history.push("/rank")}
-          >
-            Rank
-          </div>
-          <div
-            className="banner--contents__list"
-            onClick={() => history.push("/profile")}
-          >
-            Profile
-          </div>
-        </div>
-      </div>
-    </BannerWrap>
-  );
-};
-
-export default withRouter(Banner);
