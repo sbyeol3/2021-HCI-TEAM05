@@ -54,7 +54,7 @@ function App() {
       ]);
       setCodingTime(0);
     }
-  }, [status, codingTime, records, startTime]);
+  }, [status]);
 
   const removeTime = (idx) => {
     const diff = records[idx][1] - records[idx][0];

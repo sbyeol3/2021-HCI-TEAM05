@@ -4,10 +4,13 @@ import { ReactComponent as StopSvg } from "../../svg/stop.svg";
 
 const TimeRecorder = ({ status, setStatus }) => {
   const onClickButton = (type) => setStatus(type);
+  const onClickStop = () => {
+    if (status === 1) onClickButton(3);
+  };
   return (
     <Wrapper>
       <PlayButton type={1} status={status} onClick={() => onClickButton(1)} />
-      <StopButton type={3} status={status} onClick={() => onClickButton(3)} />
+      <StopButton type={3} status={status} onClick={onClickStop} />
     </Wrapper>
   );
 };
