@@ -3,16 +3,7 @@ import styled from "styled-components";
 import DayText from "./DayText";
 import { ReactComponent as ArrowSvg } from "../../svg/arrow.svg";
 
-const ONE_DAY = 86400000;
-
-const Header = () => {
-  const [date, setDate] = useState(new Date());
-
-  const onClickArrow = (type) => {
-    if (type) setDate(+date - ONE_DAY);
-    else setDate(+date + ONE_DAY);
-  };
-
+const Header = ({ onClickArrow, date }) => {
   return (
     <Wrapper>
       <LeftArrow onClick={() => onClickArrow(true)} />
@@ -28,13 +19,15 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 90px 100px;
+  margin: 90px 100px 30px 100px;
 `;
 
 const LeftArrow = styled(ArrowSvg)`
   width: 30px;
   height: 30px;
+  padding: 20px;
   cursor: pointer;
+  fill: #ff8513;
 `;
 
 const RightArrow = styled(LeftArrow)`

@@ -29,6 +29,7 @@ export default App;
 const Wrapper = styled.div`
   display: flex;
   width: 100vw;
+  min-height: 100%;
   height: 100vh;
 `;
 

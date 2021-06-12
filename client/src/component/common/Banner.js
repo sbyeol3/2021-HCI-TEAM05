@@ -47,7 +47,8 @@ export default withRouter(Banner);
 const BannerWrapper = styled.div`
   width: 300px;
   height: 100vh;
-  background-color: rgb(100%, 72.1%, 0%);
+  min-height: 100%;
+  background-color: #ff8513;
 
   .banner {
     height: 100%;
