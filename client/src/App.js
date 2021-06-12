@@ -1,4 +1,5 @@
 import { Route, BrowserRouter, Switch } from "react-router-dom";
+import Today from "./pages/Today";
 import Calendar from "./pages/Calendar";
 import Rank from "./pages/Rank";
 import Profile from "./pages/Profile";
@@ -17,9 +18,10 @@ function App() {
       <BrowserRouter>
         <Banner />
         <Switch>
-          <Route exact path="/" component={Calendar} />
+          <Route exact path="/" component={Today} />
           <Route exact path="/rank" component={Rank} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/month" component={Calendar} />
         </Switch>
       </BrowserRouter>
     </AppWrap>
