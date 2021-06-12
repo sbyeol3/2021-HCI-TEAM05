@@ -9,7 +9,7 @@ import TimeRecorder from "./component/common/TimeRecorder";
 import Banner from "./component/common/Banner";
 import styled from "styled-components";
 
-function useInterval(callback, delay, startTime, setStartTime) {
+function useInterval(callback, delay) {
   const savedCallback = useRef();
 
   useEffect(() => {
