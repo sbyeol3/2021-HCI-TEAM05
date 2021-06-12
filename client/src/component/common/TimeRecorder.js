@@ -22,8 +22,11 @@ const Wrapper = styled.div`
   bottom: 10px;
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
+  border-radius: 3px;
   background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+    0 2px 6px 2px rgba(60, 64, 67, 0.15); ;
 `;
 
 const Icon = css`
