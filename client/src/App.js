@@ -31,13 +31,47 @@ function useInterval(callback, delay) {
 function App() {
   const [todayTime, setTodayTime] = useState(0);
   const [status, setStatus] = useState(1);
+  const [records, setRecords] = useState([]);
+  const [codingTime, setCodingTime] = useState(0);
+  const [startTime, setStartTime] = useState(new Date());
 
   useInterval(
     () => {
       setTodayTime(todayTime + 1);
+      setCodingTime(codingTime + 1);
     },
-    status === 1 ? 1000 : null
+    status === 1 ? 1000 : null,
+    startTime,
+    setStartTime
   );
+
+  useEffect(() => {
+    if (status === 1) setStartTime(new Date());
+    if (status === 3) {
+      setRecords([
+        ...records,
+        [startTime, new Date(+startTime + codingTime * 1000)],
+      ]);
+      setCodingTime(0);
+    }
+  }, [status]);
+
+  const removeTime = (idx) => {
+    const diff = records[idx][1] - records[idx][0];
+    setRecords(records.filter((_, i) => i !== idx));
+    setTodayTime(todayTime - diff / 1000);
+  };
+
+  const editTime = (time, idx) => {
+    const diff = records[idx][1] - records[idx][0];
+    const newDiff = time[1] - time[0];
+    const updatedRecords = records.map((record, i) => {
+      if (idx !== i) return record;
+      return time;
+    });
+    setRecords(updatedRecords);
+    setTodayTime(todayTime - diff / 1000 + newDiff / 1000);
+  };
 
   return (
     <Wrapper>
@@ -61,7 +95,14 @@ function App() {
             <Route exact path="/rank" component={Rank} />
             <Route exact path="/profile" component={Profile} />
           </Switch>
-          {status === 3 && <Record setStatus={setStatus} />}
+          {status === 3 && (
+            <Record
+              setStatus={setStatus}
+              records={records}
+              removeTime={removeTime}
+              editTime={editTime}
+            />
+          )}
           <TimeRecorder status={status} setStatus={setStatus} />
         </RightSide>
       </BrowserRouter>
