@@ -66,11 +66,13 @@ export default Today;
 
 const Wrapper = styled.div`
   position: relative;
+  height: 100vh;
+  overflow-y: scroll;
 `;
 
 const CalendarIcon = styled(CalendarSvg)`
   position: absolute;
-  top: -50px;
+  top: 20px;
   right: 40px;
   width: 30px;
   height: 30px;

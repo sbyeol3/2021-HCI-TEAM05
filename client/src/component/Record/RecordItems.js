@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import Item from "./Item";
 
-const RecordItems = ({ records, removeTime }) => {
+const RecordItems = ({ records, removeTime, editTime }) => {
   return (
     <Wrapper>
       {records.map((rec, idx) => (
-        <Item time={rec} key={rec} idx={idx} removeTime={removeTime} />
+        <Item
+          time={rec}
+          key={rec}
+          idx={idx}
+          removeTime={removeTime}
+          editTime={editTime}
+        />
       ))}
     </Wrapper>
   );

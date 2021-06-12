@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import RecordItems from "./RecordItems";
 
-const Record = ({ setStatus, records, removeTime }) => {
+const Record = ({ setStatus, records, removeTime, editTime }) => {
   const onClickSave = () => setStatus(0);
   return (
     <Modal>
       <Title>Would you save today records?</Title>
-      <RecordItems records={records} removeTime={removeTime} />
+      <RecordItems
+        records={records}
+        removeTime={removeTime}
+        editTime={editTime}
+      />
       <SaveButton onClick={onClickSave}>save</SaveButton>
     </Modal>
   );
