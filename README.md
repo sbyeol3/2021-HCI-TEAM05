@@ -1,1 +1,6 @@
-# 2021-HCI-TEAM05
+# 2021 HCI Final Project
+> TEAM 05 : 70th birthday party
+
+## Overview
+
+- A web service that measure coding time
