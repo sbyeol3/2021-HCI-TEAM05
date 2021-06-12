@@ -1,21 +1,25 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { VictoryPie } from "victory";
+
 import Header from "../component/Header";
+import TimeRecorder from "../component/common/TimeRecorder";
 import { ReactComponent as CalendarSvg } from "../svg/calendar.svg";
-import { TIME } from "../constants/time";
+import { TIME, TOTAL_TIME } from "../constants/time";
 
 const ONE_DAY = 86400000;
-const PIE_COLOR = ["gray", "orange"];
+const PIE_COLOR = ["#d0d0d0", "#ff8513"];
 
-const createRandomDate = (date) => {
+const createRandomDate = (date, type = 0) => {
   const dateFormat = new Date(date);
   const random = (dateFormat.getMonth() + dateFormat.getDate()) % 9;
+  if (type === 1) return TOTAL_TIME[random];
   return TIME[random];
 };
 
 const Today = ({ history }) => {
   const [date, setDate] = useState(new Date());
+  const [status, setStatus] = useState(0);
 
   const onClickArrow = (type) => {
     if (type) setDate(+date - ONE_DAY);
@@ -27,6 +31,7 @@ const Today = ({ history }) => {
     <Wrapper>
       <CalendarIcon onClick={onClickCalendar} />
       <Header onClickArrow={onClickArrow} date={date} />
+      <TotalTime>{createRandomDate(date, 1)}</TotalTime>
       <PieWrapper>
         <VictoryPie
           colorScale={PIE_COLOR}
@@ -34,6 +39,7 @@ const Today = ({ history }) => {
           labelComponent={<span />}
         />
       </PieWrapper>
+      <TimeRecorder status={status} setStatus={setStatus} />
     </Wrapper>
   );
 };
@@ -52,6 +58,12 @@ const CalendarIcon = styled(CalendarSvg)`
   height: 30px;
   fill: #ff8513;
   cursor: pointer;
+`;
+
+const TotalTime = styled.div`
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
 `;
 
 const PieWrapper = styled.div`

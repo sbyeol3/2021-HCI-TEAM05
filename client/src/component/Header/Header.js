@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 90px 100px 30px 100px;
+  margin: 90px 100px 10px 100px;
 `;
 
 const LeftArrow = styled(ArrowSvg)`
