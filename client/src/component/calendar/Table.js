@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { TOTAL_TIME } from "../../constants/time";
 
 const TableWrap = styled.div`
   width: 100%;
@@ -29,7 +28,7 @@ const TableWrap = styled.div`
 const tdColor = ["#ff8513", "#ffa550", "#ffc288", "#ffe0c2", "white"];
 
 const Table = ({ year, month }) => {
-  const firstDate = new Date(`${month} 1, ${year} 00:00:00`);
+  const firstDate = new Date(year, month, 1);
   const lastDate = new Date(year, month + 1, 0);
   let dateArr = [];
   let weekArr = [];
@@ -63,7 +62,7 @@ const Table = ({ year, month }) => {
           {dateArr.map((week) => {
             return (
               <tr>
-                {week.map((date, idx) =>
+                {week.map((date) =>
                   date === 0 ? (
                     <td></td>
                   ) : (
