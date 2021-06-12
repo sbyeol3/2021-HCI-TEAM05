@@ -49,13 +49,13 @@ const Table = ({ year, month }) => {
       <table className="calendar__body">
         <thead>
           <tr>
-            <td>일</td>
-            <td>월</td>
-            <td>화</td>
-            <td>수</td>
-            <td>목</td>
-            <td>금</td>
-            <td>토</td>
+            <td>Sun</td>
+            <td>Mon</td>
+            <td>Tue</td>
+            <td>Wed</td>
+            <td>Thu</td>
+            <td>Fri</td>
+            <td>Sat</td>
           </tr>
         </thead>
         <tbody>

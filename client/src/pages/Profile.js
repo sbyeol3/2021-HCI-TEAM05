@@ -135,7 +135,9 @@ const Profile = () => {
               alt=""
               style={{ width: "4rem" }}
             />
-            <div className="git__box--name">{user.git.nickname}</div>
+            <div className="git__box--name" style={{ color: "gray" }}>
+              {user.git.nickname}
+            </div>
           </div>
           <div className="git__box--status">
             <img className="git__box--graph" src={user.git.graph} alt="" />
