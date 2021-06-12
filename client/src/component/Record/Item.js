@@ -2,12 +2,19 @@ import styled, { css } from "styled-components";
 import { ReactComponent as PencilSvg } from "../../svg/pencil.svg";
 import { ReactComponent as CancelSvg } from "../../svg/cancel.svg";
 
-const Item = ({ time }) => {
+const convertTime = (time) =>
+  `${(time.getHours() + "").padStart(2, 0)}:${(time.getMinutes() + "").padStart(
+    2,
+    0
+  )}:${(time.getSeconds() + "").padStart(2, 0)}`;
+
+const Item = ({ idx, time, removeTime }) => {
+  const onClickCancel = () => removeTime(idx);
   return (
     <Wrapper>
-      <Time>{time}</Time>
+      <Time>{convertTime(time[0]) + " ~ " + convertTime(time[1])}</Time>
       <PencilIcon />
-      <CancelIcon />
+      <CancelIcon onClick={onClickCancel} />
     </Wrapper>
   );
 };

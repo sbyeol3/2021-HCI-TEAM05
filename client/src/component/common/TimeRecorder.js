@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import { ReactComponent as PlaySvg } from "../../svg/play.svg";
-import { ReactComponent as PauseSvg } from "../../svg/pause.svg";
 import { ReactComponent as StopSvg } from "../../svg/stop.svg";
 
 const TimeRecorder = ({ status, setStatus }) => {
@@ -8,7 +7,6 @@ const TimeRecorder = ({ status, setStatus }) => {
   return (
     <Wrapper>
       <PlayButton type={1} status={status} onClick={() => onClickButton(1)} />
-      <PauseButton type={2} status={status} onClick={() => onClickButton(2)} />
       <StopButton type={3} status={status} onClick={() => onClickButton(3)} />
     </Wrapper>
   );
@@ -53,12 +51,7 @@ const IconStyle = css`
 const PlayButton = styled(PlaySvg)`
   ${Icon}
   ${IconStyle}
-`;
-
-const PauseButton = styled(PauseSvg)`
-  ${Icon}
-  ${IconStyle}
-  margin: 0 10px;
+  margin-right: 10px;
 `;
 
 const StopButton = styled(StopSvg)`
