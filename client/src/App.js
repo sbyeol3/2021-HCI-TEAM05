@@ -121,4 +121,6 @@ const Wrapper = styled.div`
 
 const RightSide = styled.div`
   width: calc(100vw - 300px);
+  height: 100vh;
+  overflow-y: scroll;
 `;

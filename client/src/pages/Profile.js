@@ -58,7 +58,7 @@ const ProfileWrap = styled.div`
 
     &__box {
       margin-top: 1rem;
-      padding: 1rem;
+      padding: 2rem;
       border-radius: 15px;
       border: solid 2px lightgray;
 
@@ -80,9 +80,8 @@ const ProfileWrap = styled.div`
       &--status {
         display: flex;
         flex-direction: column;
-
-        > * {
-          width: 100%;
+        img {
+          width: 700px;
         }
       }
     }
