@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Table from "../component/calendar/Table";
+import { ReactComponent as ArrowSvg } from "../svg/arrow.svg";
+
+const LeftArrow = styled(ArrowSvg)`
+  width: 30px;
+  height: 30px;
+  padding: 20px;
+  cursor: pointer;
+  fill: #ff8513;
+`;
+
+const RightArrow = styled(LeftArrow)`
+  transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+`;
 
 const CalendarWrap = styled.div`
   margin: 2rem;
-  width: 100%;
 
   .calendar {
     width: 100%;
@@ -16,10 +31,12 @@ const CalendarWrap = styled.div`
     &__header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin: 2rem 0;
 
       &--date {
         font-weight: bold;
+        font-size: 1.5rem;
 
         span {
           margin-left: 1rem;
@@ -31,7 +48,7 @@ const CalendarWrap = styled.div`
 
 const Calendar = () => {
   const [month, setMonth] = useState(6);
-  // const [calendar, setCalendar] = useState(null);
+  const [year, setYear] = useState(2021);
 
   const monthStr = [
     "January",
@@ -45,32 +62,42 @@ const Calendar = () => {
     "September",
     "October",
     "November",
-    "December",
+    "December"
   ];
 
   return (
     <CalendarWrap>
       <div className="calendar">
         <div className="calendar__header">
-          <img
+          <LeftArrow
             className="calendar__header--left"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVORbI7UK59o9CpXQsF_fP-eyfJ4sp1wV7-Q&usqp=CAU"
-            alt=""
-            style={{ width: "20px", height: "20px" }}
-            onClick={() => setMonth((prev) => prev - 1)}
+            onClick={() =>
+              setMonth((prev) => {
+                if (prev > 1) return prev - 1;
+                else {
+                  setYear((prev) => prev - 1);
+                  return 12;
+                }
+              })
+            }
           />
           <div className="calendar__header--date">
             {month} <span>{monthStr[month - 1]}</span>
           </div>
-          <img
+          <RightArrow
             className="calendar__header--right"
-            src="https://www.pngjoy.com/pngm/125/13965639_aarow-computer-icon-left-right-arrow-cartoon-orange.png"
-            alt=""
-            style={{ width: "20px", height: "20px" }}
-            onClick={() => setMonth((prev) => prev + 1)}
+            onClick={() =>
+              setMonth((prev) => {
+                if (prev < 12) return prev + 1;
+                else {
+                  setYear((prev) => prev + 1);
+                  return 1;
+                }
+              })
+            }
           />
         </div>
-        <Table month={month} />
+        <Table year={year} month={month} />
       </div>
     </CalendarWrap>
   );

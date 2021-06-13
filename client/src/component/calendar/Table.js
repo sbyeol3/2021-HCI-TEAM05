@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const TableWrap = styled.div`
@@ -25,31 +25,24 @@ const TableWrap = styled.div`
   }
 `;
 
-// const buildCalendar = (month) => {
-//   let rows = [];
-//     cell.value = [Math.random() * 24];
-//     if (cell.value >= 8) cell.style.backgroundColor = "rgb(81.6%, 58.9%, 0%)";
-//     else if (cell.value >= 4)
-//       cell.style.backgroundColor = "rgb(94.1%, 75.4%, 27.1%)";
-//     else if (cell.value >= 1)
-//       cell.style.backgroundColor = "rgb(100%, 89.2%, 61.2%)";
-//     else cell.style.backgroundColor = "white";
-//     cell.onClick = showRecord(cell);
-//   }
-// };
+const COLOR = ["#ff8513", "#ffa550", "#ffc288", "#ffe0c2", "white"];
 
-// // show record on modal window
-// const showRecord = (cell) => {
-//   const timeArr = cell.value;
-// };
+const randomColor = (date) => {
+  let arr = [];
+  for (let i = 0; i < date; i++) {
+    arr.push(COLOR[parseInt(Math.random() * 5)]);
+  }
 
-const Table = ({ month }) => {
-  const firstDate = new Date(`${month} 1, 2021 00:00:00`);
-  const lastDate = new Date(2021, month + 1, 0);
+  return arr;
+};
+
+const Table = ({ year, month }) => {
+  const firstDate = new Date(year, month, 1);
+  const lastDate = new Date(year, month + 1, 0);
   let dateArr = [];
   let weekArr = [];
-  console.log(firstDate.getDay());
-  console.log(lastDate.getDate());
+  const [tdColor, setTdColor] = useState([]);
+  const now = new Date();
 
   for (let i = 0; i < firstDate.getDay(); i++) {
     weekArr.push(0);
@@ -62,26 +55,53 @@ const Table = ({ month }) => {
     }
   }
 
+  useEffect(() => {
+    setTdColor(randomColor(lastDate.getDate()));
+  }, [year, month]);
+
   return (
     <TableWrap>
       <table className="calendar__body">
         <thead>
           <tr>
-            <td>일</td>
-            <td>월</td>
-            <td>화</td>
-            <td>수</td>
-            <td>목</td>
-            <td>금</td>
-            <td>토</td>
+            <td>Sun</td>
+            <td>Mon</td>
+            <td>Tue</td>
+            <td>Wed</td>
+            <td>Thu</td>
+            <td>Fri</td>
+            <td>Sat</td>
           </tr>
         </thead>
         <tbody>
-          {dateArr.map((week) => {
+          {dateArr.map((week, weekIdx) => {
             return (
               <tr>
-                {week.map((date, idx) =>
-                  date === 0 ? <td></td> : <td>{date}</td>
+                {week.map((date, dateIdx) =>
+                  date === 0 ? (
+                    <td></td>
+                  ) : month === now.getMonth() + 1 ? (
+                    <td
+                      style={{
+                        backgroundColor:
+                          weekIdx * 7 + dateIdx < now.getDate()
+                            ? tdColor[weekIdx * 7 + dateIdx]
+                            : "white"
+                      }}
+                    >
+                      {date}
+                    </td>
+                  ) : month < now.getMonth() + 1 ? (
+                    <td
+                      style={{
+                        backgroundColor: tdColor[weekIdx * 7 + dateIdx]
+                      }}
+                    >
+                      {date}
+                    </td>
+                  ) : (
+                    <td>{date}</td>
+                  )
                 )}
               </tr>
             );
